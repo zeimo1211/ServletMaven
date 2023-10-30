@@ -20,34 +20,40 @@ const passwordInput = document.querySelector('input[type="password"]');
 const loginButton = document.querySelector('.login-button');
 
 // 添加登录按钮的点击事件处理程序
-function login() {
+async function login() {
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    // 发送登录请求到servlet
-    fetch('/kaoqin', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `username=${username}&password=${password}`,
-    })
-    .then(response => response.json())
-    .then(data => {
+    try {
+        const response = await fetch('http://localhost:8080/ServletMaven/kaoqin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ username, password }),
+        });
+        const responseText = await response.text(); // 获取响应作为文本
+        console.log(responseText); // 记录响应以进行调试
+        const data = await response.json();
+
         if (data.success) {
-            // 登录成功
             localStorage.setItem('username', username);
             localStorage.setItem('isLoggedIn', 'true');
             window.location.href = '/worker_home.html';
         } else {
-            // 登录失败，显示错误消息
             alert('登录失败，请检查用户名和密码。');
         }
-    })
-    .catch(error => {
+    } catch (error) {
         console.error('登录出错:', error);
-    });
+    }
 }
+
+document.getElementById("password").addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        login();
+    }
+});
+
 
 // 添加事件监听器，监听回车键
 document.getElementById("password").addEventListener("keyup", function(event) {
