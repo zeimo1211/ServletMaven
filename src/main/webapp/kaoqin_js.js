@@ -34,7 +34,7 @@ function login() {
             if (response.success) {
                 localStorage.setItem('username', username);
                 localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = '/worker_home.html';
+                window.location.href = 'worker_home.html';
             } else {
                 alert('登录失败，请检查用户名和密码。');
             }
