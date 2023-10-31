@@ -17,9 +17,16 @@ import java.sql.SQLException;
         // 从请求中获取用户名和密码参数
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-
+        System.out.println("Username: " + username);
+        System.out.println("Password: " + password);
         // 数据库连接配置
-        String dbUrl = "jdbc:mysql://localhost:3306/kaoqin";  // 数据库URL
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        String dbUrl = "jdbc:mysql://localhost:3306/kaoqin?useSSL=false&serverTimezone=UTC";  // 数据库URL
         String dbUser = "root";  // 数据库用户名
         String dbPassword = "077418";  // 数据库密码
 
@@ -45,7 +52,7 @@ import java.sql.SQLException;
     // 检查用户登录的方法
     private boolean checkUserLogin(Connection connection, String username, String password) throws SQLException {
         // SQL查询语句，用于从数据库中检索具有给定用户名和密码的用户信息
-        String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+        String sql = "SELECT * FROM worker WHERE wno = ? AND keyword = ?";
 
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             // 在SQL查询中使用占位符'?'来代替用户名和密码，以避免SQL注入攻击

@@ -1193,342 +1193,317 @@ worker|||supervisor|localhost|UPDATE|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="318" parent="290" name="users">
+    <table id="318" parent="290" name="work_info">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="319" parent="290" name="work_info">
+    <table id="319" parent="290" name="worker">
       <Engine>InnoDB</Engine>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
-    <table id="320" parent="290" name="worker">
-      <Engine>InnoDB</Engine>
-      <CollationName>utf8mb4_0900_ai_ci</CollationName>
-    </table>
-    <column id="321" parent="313" name="lino">
+    <column id="320" parent="313" name="lino">
       <Comment>记录号</Comment>
       <DasType>char(12)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="322" parent="313" name="wno">
+    <column id="321" parent="313" name="wno">
       <Comment>员工号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="323" parent="313" name="listate">
+    <column id="322" parent="313" name="listate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;请假&apos;, &apos;销假&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="324" parent="313" name="litime">
+    <column id="323" parent="313" name="litime">
       <Comment>时间</Comment>
       <DasType>timestamp|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="325" parent="313" name="PRIMARY">
+    <index id="324" parent="313" name="PRIMARY">
       <ColNames>lino
 litime</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="326" parent="313" name="idx_ask_for_leave_info_wno">
+    <index id="325" parent="313" name="idx_ask_for_leave_info_wno">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="327" parent="313" name="idx_ask_for_leave_info_litime">
+    <index id="326" parent="313" name="idx_ask_for_leave_info_litime">
       <ColNames>litime</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="328" parent="313" name="PRIMARY">
+    <key id="327" parent="313" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <trigger id="329" parent="313" name="check_ask_for_leave_info">
+    <trigger id="328" parent="313" name="check_ask_for_leave_info">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>330</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
-    <column id="330" parent="314" name="cino">
+    <column id="329" parent="314" name="cino">
       <Comment>记录号</Comment>
       <DasType>char(12)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="331" parent="314" name="ciontime">
+    <column id="330" parent="314" name="ciontime">
       <Comment>开始时间</Comment>
       <DasType>timestamp|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="332" parent="314" name="ciofftime">
+    <column id="331" parent="314" name="ciofftime">
       <Comment>结束时间</Comment>
       <DasType>timestamp|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="333" parent="314" name="cistate">
+    <column id="332" parent="314" name="cistate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;上班&apos;, &apos;请假&apos;, &apos;出差&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="334" parent="314" name="PRIMARY">
+    <index id="333" parent="314" name="PRIMARY">
       <ColNames>cino</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="335" parent="314" name="PRIMARY">
+    <key id="334" parent="314" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="336" parent="315" name="dno">
+    <column id="335" parent="315" name="dno">
       <Comment>部门编号</Comment>
       <DasType>tinyint unsigned|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="337" parent="315" name="dname">
+    <column id="336" parent="315" name="dname">
       <Comment>部门名称</Comment>
       <DasType>varchar(20)|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="338" parent="315" name="dspot">
+    <column id="337" parent="315" name="dspot">
       <Comment>部门位置</Comment>
       <DasType>varchar(30)|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="339" parent="315" name="dontime">
+    <column id="338" parent="315" name="dontime">
       <Comment>上班时间</Comment>
       <DasType>time|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="340" parent="315" name="dofftime">
+    <column id="339" parent="315" name="dofftime">
       <Comment>下班时间</Comment>
       <DasType>time|0s</DasType>
       <Position>5</Position>
     </column>
-    <index id="341" parent="315" name="PRIMARY">
+    <index id="340" parent="315" name="PRIMARY">
       <ColNames>dno</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="342" parent="315" name="PRIMARY">
+    <key id="341" parent="315" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="343" parent="316" name="wno">
+    <column id="342" parent="316" name="wno">
       <Comment>员工号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="344" parent="316" name="dno">
+    <column id="343" parent="316" name="dno">
       <Comment>部门编号</Comment>
       <DasType>tinyint unsigned|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="345" parent="316" name="fk_worker_department">
+    <foreign-key id="344" parent="316" name="fk_worker_department">
       <ColNames>wno</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>wno</RefColNames>
       <RefTableName>worker</RefTableName>
     </foreign-key>
-    <foreign-key id="346" parent="316" name="fk_department_worker">
+    <foreign-key id="345" parent="316" name="fk_department_worker">
       <ColNames>dno</ColNames>
       <OnDelete>cascade</OnDelete>
       <OnUpdate>cascade</OnUpdate>
       <RefColNames>dno</RefColNames>
       <RefTableName>department</RefTableName>
     </foreign-key>
-    <index id="347" parent="316" name="idx_department_worker_wno">
+    <index id="346" parent="316" name="idx_department_worker_wno">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="348" parent="316" name="idx_department_worker_dno">
+    <index id="347" parent="316" name="idx_department_worker_dno">
       <ColNames>dno</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="349" parent="317" name="bino">
+    <column id="348" parent="317" name="bino">
       <Comment>记录号</Comment>
       <DasType>char(12)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="350" parent="317" name="wno">
+    <column id="349" parent="317" name="wno">
       <Comment>员工号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="351" parent="317" name="bistate">
+    <column id="350" parent="317" name="bistate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;出差&apos;, &apos;回岗&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="352" parent="317" name="bitime">
+    <column id="351" parent="317" name="bitime">
       <Comment>时间</Comment>
       <DasType>timestamp|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="353" parent="317" name="PRIMARY">
+    <index id="352" parent="317" name="PRIMARY">
       <ColNames>bino
 bitime</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="354" parent="317" name="idx_out_business_info_wno">
+    <index id="353" parent="317" name="idx_out_business_info_wno">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="355" parent="317" name="idx_out_business_info_bitime">
+    <index id="354" parent="317" name="idx_out_business_info_bitime">
       <ColNames>bitime</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="356" parent="317" name="PRIMARY">
+    <key id="355" parent="317" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="357" parent="318" name="id">
-      <AutoIncrement>3</AutoIncrement>
-      <DasType>int|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="358" parent="318" name="username">
-      <DasType>varchar(255)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="359" parent="318" name="password">
-      <DasType>varchar(255)|0s</DasType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <index id="360" parent="318" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <key id="361" parent="318" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="362" parent="319" name="wino">
+    <column id="356" parent="318" name="wino">
       <Comment>记录号</Comment>
       <DasType>char(12)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="363" parent="319" name="wno">
+    <column id="357" parent="318" name="wno">
       <Comment>员工号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="364" parent="319" name="wistate">
+    <column id="358" parent="318" name="wistate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;上班&apos;, &apos;下班&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="365" parent="319" name="witime">
+    <column id="359" parent="318" name="witime">
       <Comment>时间</Comment>
       <DasType>timestamp|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <index id="366" parent="319" name="PRIMARY">
+    <index id="360" parent="318" name="PRIMARY">
       <ColNames>wino
 witime</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="367" parent="319" name="idx_work_info_wno">
+    <index id="361" parent="318" name="idx_work_info_wno">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="368" parent="319" name="idx_work_info_witime">
+    <index id="362" parent="318" name="idx_work_info_witime">
       <ColNames>witime</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="369" parent="319" name="PRIMARY">
+    <key id="363" parent="318" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <trigger id="370" parent="319" name="check_work_info">
+    <trigger id="364" parent="318" name="check_work_info">
       <Definer>root@localhost</Definer>
       <Events>I</Events>
       <SourceTextLength>334</SourceTextLength>
       <Turn>after-row</Turn>
     </trigger>
-    <column id="371" parent="320" name="wno">
+    <column id="365" parent="319" name="wno">
       <Comment>员工编号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="372" parent="320" name="wname">
+    <column id="366" parent="319" name="wname">
       <Comment>姓名</Comment>
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="373" parent="320" name="gender">
+    <column id="367" parent="319" name="gender">
       <Comment>性别</Comment>
       <DasType>enum(&apos;男&apos;, &apos;女&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="374" parent="320" name="wphone">
+    <column id="368" parent="319" name="wphone">
       <Comment>电话</Comment>
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="375" parent="320" name="wjob">
+    <column id="369" parent="319" name="wjob">
       <Comment>职务</Comment>
       <DasType>varchar(20)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="376" parent="320" name="wstate">
+    <column id="370" parent="319" name="wstate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;在岗&apos;, &apos;离岗&apos;)|0e</DasType>
       <DefaultExpression>&apos;离岗&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="377" parent="320" name="waddress">
+    <column id="371" parent="319" name="waddress">
       <Comment>住址</Comment>
       <DasType>varchar(30)|0s</DasType>
       <Position>7</Position>
     </column>
-    <index id="378" parent="320" name="PRIMARY">
+    <column id="372" parent="319" name="keyword">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
+      <Position>8</Position>
+    </column>
+    <index id="373" parent="319" name="PRIMARY">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="379" parent="320" name="idx_worker_wname">
+    <index id="374" parent="319" name="idx_worker_wname">
       <ColNames>wname</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="380" parent="320" name="idx_worker_wstate">
+    <index id="375" parent="319" name="idx_worker_wstate">
       <ColNames>wstate</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="381" parent="320" name="PRIMARY">
+    <key id="376" parent="319" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

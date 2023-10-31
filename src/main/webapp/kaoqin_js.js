@@ -20,34 +20,34 @@ const passwordInput = document.querySelector('input[type="password"]');
 const loginButton = document.querySelector('.login-button');
 
 // 添加登录按钮的点击事件处理程序
-async function login() {
+function login() {
     const username = usernameInput.value;
     const password = passwordInput.value;
 
-    try {
-        const response = await fetch('http://localhost:8080/ServletMaven/kaoqin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-        });
-        const responseText = await response.text(); // 获取响应作为文本
-        console.log(responseText); // 记录响应以进行调试
-        const data = await response.json();
+    const xhr = new XMLHttpRequest();
+    xhr.open("POST", 'http://localhost:8080/ServletMaven/kaoqin', true);
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-        if (data.success) {
-            localStorage.setItem('username', username);
-            localStorage.setItem('isLoggedIn', 'true');
-            window.location.href = '/worker_home.html';
-        } else {
-            alert('登录失败，请检查用户名和密码。');
+    xhr.send(JSON.stringify({ username, password }));
+
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+                const data = JSON.parse(xhr.responseText);
+                if (data.success) {
+                    localStorage.setItem('username', username);
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = '/worker_home.html';
+                } else {
+                    alert('登录失败，请检查用户名和密码。');
+                }
+            } else {
+                console.error('登录出错:', xhr.status, xhr.statusText);
+            }
         }
-    } catch (error) {
-        console.error('登录出错:', error);
-    }
-}
+    };
 
+}
 document.getElementById("password").addEventListener("keyup", function(event) {
     if (event.key === "Enter") {
         login();
