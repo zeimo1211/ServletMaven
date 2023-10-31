@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="sign.css">
+    <title>考勤系统</title>
+</head>
+<body>
+    <div class="container">
+        <div class="button-container">
+            <button class="button signin-button" onclick="sign()">签到</button>
+            <button class="button signout-button" onclick="showSignOutMessage()">签退</button>
+        </div>
+    </div>
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+
+    <div class="button-container_circle">
+        <a href="worker_home.html">
+            <div class="circle-button">回到主页</div>
+            </a>
+            <a href="departmentinfo.html">
+            <div class="circle-button">部门信息</div>
+            </a>
+            <a href="workerinfo.html">
+            <div class="circle-button">个人信息</div>
+            </a>
+            <a href="kaoqin.html">
+            <div class="circle-button">退出登录</div>
+            </a>
+    </div>
+    <script src="sign.js"></script>
+</body>
+</html>
