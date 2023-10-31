@@ -14,6 +14,9 @@ public class sign extends HttpServlet {
         // 从请求中获取用户名和密码参数
         //System.out.println("username: " );
         String username = request.getParameter("username");
+        String type = request.getParameter("type");
+
+
         // 数据库连接配置
 
         try {
@@ -30,7 +33,7 @@ public class sign extends HttpServlet {
             Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
             // 调用方法检查用户登录
-            if (usersign(connection, username)) {
+            if (usersign(connection, username,type)) {
                 // 如果登录成功，发送成功响应
                 sendSuccessResponse(response);
             } else {
@@ -45,7 +48,7 @@ public class sign extends HttpServlet {
     }
 
     // 插入签到信息
-    private boolean usersign(Connection connection, String username) throws SQLException {
+    private boolean usersign(Connection connection, String username , String type) throws SQLException {
         String sql = "INSERT INTO work_info (wno, wistate, witime) VALUES (?, ?, ?)";
 
         // 获取当前时间用于签到
@@ -53,7 +56,7 @@ public class sign extends HttpServlet {
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, username);
-            statement.setString(2, "上班");
+            statement.setString(2, type );
             statement.setTimestamp(3, timestamp);
 
             int rowsInserted = statement.executeUpdate();
