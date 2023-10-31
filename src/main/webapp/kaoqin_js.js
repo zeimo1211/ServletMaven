@@ -23,29 +23,27 @@ const loginButton = document.querySelector('.login-button');
 function login() {
     const username = usernameInput.value;
     const password = passwordInput.value;
-
-    const xhr = new XMLHttpRequest();
+    var data = "username=" + username + "&password=" + password;
+    var xhr = new XMLHttpRequest();
     xhr.open("POST", 'http://localhost:8080/ServletMaven/kaoqin', true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.send(JSON.stringify({ username, password }));
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
     xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                const data = JSON.parse(xhr.responseText);
-                if (data.success) {
-                    localStorage.setItem('username', username);
-                    localStorage.setItem('isLoggedIn', 'true');
-                    window.location.href = '/worker_home.html';
-                } else {
-                    alert('登录失败，请检查用户名和密码。');
-                }
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                localStorage.setItem('username', username);
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = '/worker_home.html';
             } else {
-                console.error('登录出错:', xhr.status, xhr.statusText);
+                alert('登录失败，请检查用户名和密码。');
             }
+        }else {
+            console.error('登录出错:', xhr.status, xhr.statusText);
         }
     };
+
+    xhr.send(data);
 
 }
 document.getElementById("password").addEventListener("keyup", function(event) {

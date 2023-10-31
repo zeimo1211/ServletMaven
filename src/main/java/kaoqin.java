@@ -12,13 +12,14 @@ import java.sql.SQLException;
 
 @WebServlet("/kaoqin")
     public class kaoqin extends HttpServlet {
+    private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 从请求中获取用户名和密码参数
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("Username: " + username);
-        System.out.println("Password: " + password);
+        //System.out.println("Username: " + username);
+        //System.out.println("Password: " + password);
         // 数据库连接配置
 
         try {
