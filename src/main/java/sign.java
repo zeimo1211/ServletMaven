@@ -4,11 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/sign")
 public class sign extends HttpServlet {
@@ -16,8 +12,8 @@ public class sign extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 从请求中获取用户名和密码参数
+        //System.out.println("username: " );
         String username = request.getParameter("username");
-        //System.out.println("Username: " + username);
         // 数据库连接配置
 
         try {
@@ -50,20 +46,22 @@ public class sign extends HttpServlet {
 
     // 插入签到信息
     private boolean usersign(Connection connection, String username) throws SQLException {
-        // SQL查询插入语句，用于从数据库中检索具有给定用户名和密码的用户信息
-        String sql = "INSERT INTO your_table (wno, wistate, witime) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO work_info (wno, wistate, witime) VALUES (?, ?, ?)";
 
-        try (PreparedStatement statement = connection.prepareStatement(sql)) {
-            // 在SQL插入中使用占位符'?'来代替用户名和密码，以避免SQL注入攻击
-            statement.setString(1, username);  // 将方法参数中的用户名设置为第一个占位符
-            statement.setString(2, "上班");  // 将方法参数中的密码设置为第二个占位符
-            statement.setString(3, "当前时间");
-            try (ResultSet resultSet = statement.executeQuery()) {
-                // 执行SQL查询并将结果存储在ResultSet对象中
-                // 如果查询返回结果，表示用户名和密码匹配，表示用户登录成功
+        // 获取当前时间用于签到
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                return resultSet.next();  // 返回true表示登录成功，否则返回false表示登录失败
+        try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, username);
+            statement.setString(2, "上班");
+            statement.setTimestamp(3, timestamp);
+
+            int rowsInserted = statement.executeUpdate();
+
+            if (rowsInserted == 1) {
+                return true;
             }
+            return false;
         }
     }
 

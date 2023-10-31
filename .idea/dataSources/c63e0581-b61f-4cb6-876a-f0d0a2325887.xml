@@ -1438,72 +1438,66 @@ witime</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <trigger id="364" parent="318" name="check_work_info">
-      <Definer>root@localhost</Definer>
-      <Events>I</Events>
-      <SourceTextLength>334</SourceTextLength>
-      <Turn>after-row</Turn>
-    </trigger>
-    <column id="365" parent="319" name="wno">
+    <column id="364" parent="319" name="wno">
       <Comment>员工编号</Comment>
       <DasType>char(8)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="366" parent="319" name="wname">
+    <column id="365" parent="319" name="wname">
       <Comment>姓名</Comment>
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="367" parent="319" name="gender">
+    <column id="366" parent="319" name="gender">
       <Comment>性别</Comment>
       <DasType>enum(&apos;男&apos;, &apos;女&apos;)|0e</DasType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="368" parent="319" name="wphone">
+    <column id="367" parent="319" name="wphone">
       <Comment>电话</Comment>
       <DasType>varchar(20)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="369" parent="319" name="wjob">
+    <column id="368" parent="319" name="wjob">
       <Comment>职务</Comment>
       <DasType>varchar(20)|0s</DasType>
       <Position>5</Position>
     </column>
-    <column id="370" parent="319" name="wstate">
+    <column id="369" parent="319" name="wstate">
       <Comment>状态</Comment>
       <DasType>enum(&apos;在岗&apos;, &apos;离岗&apos;)|0e</DasType>
       <DefaultExpression>&apos;离岗&apos;</DefaultExpression>
       <NotNull>1</NotNull>
       <Position>6</Position>
     </column>
-    <column id="371" parent="319" name="waddress">
+    <column id="370" parent="319" name="waddress">
       <Comment>住址</Comment>
       <DasType>varchar(30)|0s</DasType>
       <Position>7</Position>
     </column>
-    <column id="372" parent="319" name="keyword">
+    <column id="371" parent="319" name="keyword">
       <DasType>varchar(255)|0s</DasType>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <index id="373" parent="319" name="PRIMARY">
+    <index id="372" parent="319" name="PRIMARY">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="374" parent="319" name="idx_worker_wname">
+    <index id="373" parent="319" name="idx_worker_wname">
       <ColNames>wname</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="375" parent="319" name="idx_worker_wstate">
+    <index id="374" parent="319" name="idx_worker_wstate">
       <ColNames>wstate</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="376" parent="319" name="PRIMARY">
+    <key id="375" parent="319" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

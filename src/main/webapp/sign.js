@@ -17,19 +17,21 @@ function showSignOutMessage() {
 function sign() {
     var username = localStorage.getItem('username');
     var data = "username=" + username ;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", 'http://localhost:8080/ServletMaven/sign', true);
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    var xhr1 = new XMLHttpRequest();
+    xhr1.open("POST", 'http://localhost:8080/ServletMaven/sign', true);
+    xhr1.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
+    xhr1.onreadystatechange = function() {
+        if (xhr1.readyState == 4 && xhr1.status == 200) {
+            var response = JSON.parse(xhr1.responseText);
             if (response.success) {
                 alert("签到成功！");
             } else {
                 alert("签到失败");
             }
+        }else {
+            console.error('签到出错:', xhr1.status, xhr1.statusText);
         }
     };
-    xhr.send(data);
+    xhr1.send(data);
 }
