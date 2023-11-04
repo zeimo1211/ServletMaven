@@ -51,11 +51,3 @@ document.getElementById("password").addEventListener("keyup", function(event) {
         login();
     }
 });
-
-
-// 添加事件监听器，监听回车键
-document.getElementById("password").addEventListener("keyup", function(event) {
-    if (event.key === "Enter") {
-        login(); // 当按下回车键时调用登录函数
-    }
-});

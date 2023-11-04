@@ -1396,8 +1396,9 @@ bitime</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="356" parent="318" name="wino">
+      <AutoIncrement>11</AutoIncrement>
       <Comment>记录号</Comment>
-      <DasType>char(12)|0s</DasType>
+      <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
@@ -1420,8 +1421,7 @@ bitime</ColNames>
       <Position>4</Position>
     </column>
     <index id="360" parent="318" name="PRIMARY">
-      <ColNames>wino
-witime</ColNames>
+      <ColNames>wino</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
