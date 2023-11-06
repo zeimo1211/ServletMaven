@@ -1396,7 +1396,7 @@ bitime</ColNames>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="356" parent="318" name="wino">
-      <AutoIncrement>11</AutoIncrement>
+      <AutoIncrement>13</AutoIncrement>
       <Comment>记录号</Comment>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>

@@ -6,8 +6,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
 
-@WebServlet("/sign")
-public class sign extends HttpServlet {
+@WebServlet("/away")
+public class away extends HttpServlet {
     private static final long serialVersionUID = 1L;
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -15,6 +15,9 @@ public class sign extends HttpServlet {
         //System.out.println("username: " );
         String username = request.getParameter("username");
         String type = request.getParameter("type");
+        String startTime = request.getParameter("startTime");
+        String endTime = request.getParameter("endTime");
+        String reason = request.getParameter("reason");
 
 
         // 数据库连接配置
@@ -33,7 +36,8 @@ public class sign extends HttpServlet {
             Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 
             // 调用方法插入数据
-            if (usersign(connection, username,type)) {
+            if (useraway(connection, username,type,startTime,endTime,reason)) {
+                // 如果插入成功，发送成功响应
                 sendSuccessResponse(response);
             } else {
                 // 如果插入失败，发送失败响应
@@ -47,17 +51,18 @@ public class sign extends HttpServlet {
     }
 
     // 插入签到信息
-    private boolean usersign(Connection connection, String username , String type) throws SQLException {
-        String sql = "INSERT INTO work_info (wno, wistate, witime) VALUES (?, ?, ?)";
-
-        // 获取当前时间用于签到
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+    private boolean useraway(Connection connection, String username , String type, String startTime,String endTime,String reason) throws SQLException {
+        String sql = "INSERT INTO out_business_info (wno, bistate, bitime,bireason) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, username);
             statement.setString(2, type );
-            statement.setTimestamp(3, timestamp);
-
+            if ("出差".equals(type)){
+                statement.setTimestamp(3, Timestamp.valueOf(startTime));
+            }else{
+                statement.setTimestamp(3, Timestamp.valueOf(endTime));
+            }
+            statement.setString(4, reason );
             int rowsInserted = statement.executeUpdate();
 
             if (rowsInserted == 1) {
