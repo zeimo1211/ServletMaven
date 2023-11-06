@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="S_all.css">
+    <title>考勤系统</title>
+</head>
+<body>
+    <h1>全勤统计</h1>
+    
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+
+    <div class="button-container_circle">
+        <a href="boss_home.html">
+            <div class="circle-button">回到主页</div>
+            </a>
+            <a href="departmentinfo_B.html">
+            <div class="circle-button">部门信息</div>
+            </a>
+            <a href="bossinfo.html">
+            <div class="circle-button">个人信息</div>
+            </a>
+            <a href="kaoqin.html">
+            <div class="circle-button">退出登录</div>
+            </a>
+    </div>
+
+    <div id="container">
+        <label for="startTime">开始时间:</label>
+        <input type="datetime-local" id="startTime" name="startTime"><br><br>
+
+        <label for="endTime">结束时间:</label>
+        <input type="datetime-local" id="endTime" name="endTime"><br><br>
+
+        <button class="button" id="generateButton" onclick="generateTable()">统计</button>
+        <a href="statistics.html">
+        <button class="button" id="backButton">返回</button>
+        </a>
+        <div id="tableContainer">
+            <!-- 表格将在此处生成 -->
+        </div>
+    </div>
+    <script src="S_all.js"></script>
+</body>
+</html>

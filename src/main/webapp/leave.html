@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="leave.css">
+    <title>考勤系统</title>
+</head>
+<body>
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+
+    <div class="button-container_circle">
+        <a href="worker_home.html">
+            <div class="circle-button">回到主页</div>
+            </a>
+            <a href="departmentinfo.html">
+            <div class="circle-button">部门信息</div>
+            </a>
+            <a href="workerinfo.html">
+            <div class="circle-button">个人信息</div>
+            </a>
+            <a href="kaoqin.html">
+            <div class="circle-button">退出登录</div>
+            </a>
+    </div>
+
+    <div class="container">
+        <h1>请假申请</h1>
+        <form id="leaveForm">
+            <label for="startTime">请假开始时间:</label>
+            <input type="datetime-local" id="startTime" required>
+            
+            <label for="endTime">请假结束时间:</label>
+            <input type="datetime-local" id="endTime" required>
+            
+            <textarea id="reason" placeholder="请假理由：请输入" required></textarea>
+
+            <label>请假类型:</label>
+            <label for="sickLeave">病假</label>
+            <input type="radio" id="sickLeave" name="leaveType" value="病假">
+            <label for="personalLeave">事假</label>
+            <input type="radio" id="personalLeave" name="leaveType" value="事假">
+
+            <br><br>
+
+            <button type="button" onclick="submitForm()">申请</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    
+    <script src="leave.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="boss.css">
+    <title>考勤系统</title>
+</head>
+<body>
+    <div class="container">
+        <h1>管理员登录</h1>
+        <div class="input-container">
+            <input type="text" placeholder="用户名">
+        </div>
+        <div class="input-container">
+            <input type="password" placeholder="密码">
+        </div>
+        <a href="boss_home.html">
+        <button class="login-button" onclick="login()">登录</button>
+        </a>
+    </div>
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+    <a href="kaoqin.html">
+    <button class="admin-button">返回员工登录</button>
+    </a>
+    <script src="boss.js"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="away.css">
+    <title>考勤系统</title>
+</head>
+<body>
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+
+    <div class="button-container_circle">
+        <a href="worker_home.html">
+            <div class="circle-button">回到主页</div>
+            </a>
+            <a href="departmentinfo.html">
+            <div class="circle-button">部门信息</div>
+            </a>
+            <a href="workerinfo.html">
+            <div class="circle-button">个人信息</div>
+            </a>
+            <a href="kaoqin.html">
+            <div class="circle-button">退出登录</div>
+            </a>
+    </div>
+
+    <div class="container">
+        <h1>出差申请</h1>
+        <form id="leaveForm">
+            <label for="startTime">出差开始时间:</label>
+            <input type="datetime-local" id="startTime" required>
+            
+            <label for="endTime">出差结束时间:</label>
+            <input type="datetime-local" id="endTime" required>
+            
+            <textarea id="reason" placeholder="出差事由：请输入" required></textarea>
+
+            
+            <br><br>
+
+            <button type="button" onclick="submitForm()">申请</button>
+        </form>
+        <p id="result"></p>
+    </div>
+    
+    <script src="away.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#datetime-container {
+    position: absolute;
+    top: 10px; /* 距离顶部的距离 */
+    left: 10px; /* 距离右侧的距离 */
+    background-color: #ffffff; /* 背景颜色 */
+    padding: 10px;
+    border: 1px solid #ccc; /* 边框样式 */
+    border-radius: 5px; /* 边框圆角 */
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); /* 阴影效果 */
+    display: inline-block; /* 使容器大小适应内容 */
+    text-align: center; /* 水平居中 */
+    line-height: 0px; /* 设置行高等于容器的高度，垂直居中 */
+    height: 30px; /* 设置容器的高度 */
+}
+
+.button-container_circle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+}
+
+.circle-button {
+    width: 50px;
+    height: 50px;
+    background-color: #3498db;
+    border-radius: 50%;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+h1 {
+    background-color: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin: 100px 0 50px 0;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#modify-button {
+    display: block;
+    width: 150px;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#modify-button:hover {
+    background-color: #2980b9;
+}
