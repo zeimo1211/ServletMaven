@@ -38,7 +38,7 @@ public class workerinfo extends HttpServlet {
                 String waddress = resultSet.getString("waddress");
 
                 // 构造JSON响应
-                String json = "{\"wname\":\"" + wname + "\",\"gender\":\"" + gender + "\",\"wphone\":\"" + wphone + "\",\"wjob\":\"" + wjob + "\",\"wstate\":\"" + wstate + "\",\"waddress\":\"" + waddress + "\"}";
+                String json = "{\"姓名\":\"" + wname + "\",\"性别\":\"" + gender + "\",\"电话号码\":\"" + wphone + "\",\"职务\":\"" + wjob + "\",\"状态\":\"" + wstate + "\",\"住址\":\"" + waddress + "\"}";
 
                 PrintWriter out = response.getWriter();
                 out.print(json);
