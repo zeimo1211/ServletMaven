@@ -1452,20 +1452,24 @@ worker|||supervisor|localhost|UPDATE|G</Grants>
       <NotNull>1</NotNull>
       <Position>8</Position>
     </column>
-    <index id="366" parent="318" name="PRIMARY">
+    <column id="366" parent="318" name="issuper">
+      <DasType>enum(&apos;true&apos;, &apos;false&apos;)|0e</DasType>
+      <Position>9</Position>
+    </column>
+    <index id="367" parent="318" name="PRIMARY">
       <ColNames>wno</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="367" parent="318" name="idx_worker_wname">
+    <index id="368" parent="318" name="idx_worker_wname">
       <ColNames>wname</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="368" parent="318" name="idx_worker_wstate">
+    <index id="369" parent="318" name="idx_worker_wstate">
       <ColNames>wstate</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="369" parent="318" name="PRIMARY">
+    <key id="370" parent="318" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
