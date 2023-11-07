@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="change_info.css">
+    <title>考勤系统</title>
+</head>
+<body>
+
+<div id="datetime-container">
+    <p id="datetime"></p>
+</div>
+
+<div class="button-container_circle">
+    <a href="worker_home.html">
+        <div class="circle-button">回到主页</div>
+    </a>
+    <a href="departmentinfo.html">
+        <div class="circle-button">部门信息</div>
+    </a>
+    <a href="workerinfo.html">
+        <div class="circle-button">个人信息</div>
+    </a>
+    <a href="index.html">
+        <div class="circle-button">退出登录</div>
+    </a>
+</div>
+
+<div class="container">
+<h1>用户信息修改</h1>
+<form id="changeForm">
+    <textarea id="name" placeholder="姓名" required></textarea>
+    <label>性别：</label>
+    <input type="radio" id="male" name="gender" value="male">
+    <label for="male">男性</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">女性</label>
+
+    <textarea id="phone" placeholder="电话" required></textarea>
+
+    <textarea id="address" placeholder="地址" required></textarea>
+
+    <button type="button" onclick="change_w()">修改</button>
+</form>
+
+<script src="change_info.js"></script>
+</div>
+</body>
+</html>
