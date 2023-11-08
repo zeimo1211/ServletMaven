@@ -50,7 +50,7 @@ public class change_d extends HttpServlet {
     }
     private boolean userchange(Connection connection, String dno , String dname,String dspot,String dontime, String dofftime) throws SQLException {
 
-        String updateQuery = "UPDATE deaprtment SET dname=?, dspot=?, dontime=?, dofftime=? WHERE dno=?";
+        String updateQuery = "UPDATE department SET dname=?, dspot=?, dontime=?, dofftime=? WHERE dno=?";
         PreparedStatement preparedStatement = connection.prepareStatement(updateQuery);
 
         preparedStatement.setString(1, dname);

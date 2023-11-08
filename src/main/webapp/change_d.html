@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="change_d.css">
+    <title>考勤系统</title>
+</head>
+<body>
+
+    <div id="datetime-container">
+        <p id="datetime"></p>
+    </div>
+
+    <div class="button-container_circle">
+        <a href="boss_home.html">
+            <div class="circle-button">回到主页</div>
+        </a>
+        <a href="departmentinfo_B.html">
+            <div class="circle-button">部门信息</div>
+        </a>
+        <a href="bossinfo.html">
+            <div class="circle-button">个人信息</div>
+        </a>
+        <a href="index.html">
+            <div class="circle-button">退出登录</div>
+        </a>
+    </div>
+
+    <div class="container">
+        <h1>部门信息修改</h1>
+        <form id="changeForm">
+            <div class="input-container">
+                <input type="text" placeholder="部门编号" name="dno" id="dno">
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="部门名称" name="dname" id="dname">
+            </div>
+            <div class="input-container">
+                <input type="text" placeholder="地址" name="dspot" id="dspot">
+            </div>
+            <label for="dontime">部门上班时间:</label>
+            <input type="time" id="dontime" required>
+            <br><br>
+
+            <label for="dofftime">部门下班时间:</label>
+            <input type="time" id="dofftime" required>
+
+            <br><br>
+
+            <button type="button" onclick="change_d()">修改</button>
+        </form>
+    </div>
+    <script src="change_d.js"></script>
+</body>
+</html>
