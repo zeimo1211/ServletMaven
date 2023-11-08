@@ -3,6 +3,11 @@
     <words>
       <w>blogin</w>
       <w>departmentinfo</w>
+      <w>dname</w>
+      <w>dnamename</w>
+      <w>dofftime</w>
+      <w>dontime</w>
+      <w>dspot</w>
       <w>workerinfo</w>
     </words>
   </dictionary>

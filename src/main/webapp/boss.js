@@ -39,9 +39,9 @@ function blogin() {
             if (response.success) {
                 localStorage.setItem('username', username);
                 localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'worker_home.html';
+                window.location.href = 'boss_home.html';
             } else {
-                alert('登录失败，请检查用户名和密码。');
+                alert('登录失败，请检查用户名，密码和是否具有管理员权限。');
             }
         }else {
             console.error('登录出错:', xhr.status, xhr.statusText);

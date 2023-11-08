@@ -21,7 +21,7 @@ function change_w() {
 
     // 发送数据到后端Servlet
     if (!wname || !gender || !wphone || !waddress) {
-        alert("请填写完整的申请信息");
+        alert("请填写完整的修改信息");
     } else {
         var xhr7 = new XMLHttpRequest();
         xhr7.open("POST", 'http://localhost:8080/ServletMaven/changew', true);
