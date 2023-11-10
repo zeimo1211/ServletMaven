@@ -25,7 +25,7 @@ function generateTable() {
 
         // 创建表头
         const headerRow = table.insertRow(0);
-        const headers = ["姓名", "工号", "开始时间", "结束时间", "加班时长"];
+        const headers = ["姓名", "工号", "日期", "加班时长"];
 
         for (let i = 0; i < headers.length; i++) {
             const th = document.createElement("th");
@@ -35,9 +35,9 @@ function generateTable() {
 
         // 模拟生成若干行数据
         const data = [
-            ["John", "12345", "2023-09-23T08:00", "2023-09-23T16:00", "8小时"],
-            ["Bob", "67890", "2023-09-24T09:00", "2023-09-24T17:00", "8小时"],
-            ["Charlie", "24680", "2023-09-25T10:00", "2023-09-25T18:00", "8小时"]
+            ["John", "12345",  "2023-09-23", "8小时"],
+            ["Bob", "67890",  "2023-09-24", "8小时"],
+            ["Charlie", "24680",  "2023-09-25", "8小时"]
         ];
 
         // 创建数据行

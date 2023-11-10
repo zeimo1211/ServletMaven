@@ -12,47 +12,77 @@ updateDateTime();
 // 每秒更新一次日期和时间
 setInterval(updateDateTime, 1000);
 
-function generateTable() {
+function s_all() {
     const startTime = document.getElementById("startTime").value;
     const endTime = document.getElementById("endTime").value;
 
-    if (startTime && endTime) {
-        // 获取表格容器
-        const tableContainer = document.getElementById("tableContainer");
-
-        // 创建表格元素
-        const table = document.createElement("table");
-
-        // 创建表头
-        const headerRow = table.insertRow(0);
-        const headers = ["姓名", "工号", "姓名", "工号"];
-
-        for (let i = 0; i < headers.length; i++) {
-            const th = document.createElement("th");
-            th.textContent = headers[i];
-            headerRow.appendChild(th);
-        }
-
-        // 模拟生成若干行数据
-        const data = [
-            ["John", "12345", "Alice", "56789"],
-            ["Bob", "67890", "Eve", "98765"],
-            ["Charlie", "24680", "Grace", "13579"]
-        ];
-
-        // 创建数据行
-        for (let i = 0; i < data.length; i++) {
-            const row = table.insertRow(i + 1);
-            for (let j = 0; j < data[i].length; j++) {
-                const cell = row.insertCell(j);
-                cell.textContent = data[i][j];
-            }
-        }
-
-        // 清空表格容器并添加新表格
-        tableContainer.innerHTML = "";
-        tableContainer.appendChild(table);
+    if (!startTime || !endTime ) {
+        alert("请填写完整的统计信息");
     } else {
-        alert("请先选择开始时间和结束时间");
+        var data9 = "&startTime=" + startTime + "&endTime=" + endTime ;
+        var xhr9 = new XMLHttpRequest();
+        xhr9.open("POST", 'http://localhost:8080/ServletMaven/sall', true);
+        xhr9.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+        xhr9.onreadystatechange = function() {
+            if (xhr9.readyState === 4) {
+                if (xhr9.status === 200) {
+                    if (xhr9.responseText) {
+                        var response = JSON.parse(xhr9.responseText);
+                        displayArrivals(response);
+                    } else {
+                        console.error("No response data received.");
+                    }
+                } else {
+                    console.error("Failed to fetch data. Status code: " + xhr9.status);
+                }
+            }
+        };
+
+        xhr9.send(data9);
+
+    }
+}
+
+function displayArrivals(arrivals) {
+    var resultContainer = document.getElementById('tableContainer');
+
+    // 清空resultContainer内容
+    resultContainer.innerHTML = '';
+
+    if (arrivals.length > 0) {
+        var table = document.createElement('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+
+        var headerRow = document.createElement('tr');
+        var headerCell1 = document.createElement('th');
+        headerCell1.textContent = 'WNO';
+        var headerCell2 = document.createElement('th');
+        headerCell2.textContent = 'WNAME';
+
+        headerRow.appendChild(headerCell1);
+        headerRow.appendChild(headerCell2);
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        for (var i = 0; i < arrivals.length; i++) {
+            var arrival = arrivals[i];
+            var row = document.createElement('tr');
+            var cell1 = document.createElement('td');
+            cell1.textContent = arrival.wno;
+            var cell2 = document.createElement('td');
+            cell2.textContent = arrival.wname;
+
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            tbody.appendChild(row);
+        }
+
+        table.appendChild(tbody);
+        resultContainer.appendChild(table);
+    } else {
+        // 结果为空时显示提示信息
+        resultContainer.textContent = '无全勤员工';
     }
 }
