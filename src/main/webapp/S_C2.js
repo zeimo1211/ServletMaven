@@ -12,7 +12,7 @@ updateDateTime();
 // 每秒更新一次日期和时间
 setInterval(updateDateTime, 1000);
 
-function s_b() {
+function s_c2() {
     const startTime = document.getElementById("startTime").value;
     const endTime = document.getElementById("endTime").value;
 
@@ -21,7 +21,7 @@ function s_b() {
     } else {
         var data9 = "&startTime=" + startTime + "&endTime=" + endTime ;
         var xhr9 = new XMLHttpRequest();
-        xhr9.open("POST", 'http://localhost:8080/ServletMaven/sb', true);
+        xhr9.open("POST", 'http://localhost:8080/ServletMaven/sc2', true);
         xhr9.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
         xhr9.onreadystatechange = function() {
@@ -59,7 +59,7 @@ function displayArrivals(arrivals) {
         var headerCell1 = document.createElement('th');
         headerCell1.textContent = '员工号';
         var headerCell2 = document.createElement('th');
-        headerCell2.textContent = '请假日期';
+        headerCell2.textContent = '回岗日期';
         var headerCell3 = document.createElement('th');
         headerCell3.textContent = '原因';
 
@@ -75,9 +75,9 @@ function displayArrivals(arrivals) {
             var cell1 = document.createElement('td');
             cell1.textContent = arrival.wno;
             var cell2 = document.createElement('td');
-            cell2.textContent = arrival.litime;
+            cell2.textContent = arrival.bitime;
             var cell3 = document.createElement('td');
-            cell3.textContent = arrival.lireason;
+            cell3.textContent = arrival.bireason;
             row.appendChild(cell1);
             row.appendChild(cell2);
             row.appendChild(cell3);
@@ -88,6 +88,6 @@ function displayArrivals(arrivals) {
         resultContainer.appendChild(table);
     } else {
         // 结果为空时显示提示信息
-        resultContainer.textContent = '无请假员工';
+        resultContainer.textContent = '无回岗员工';
     }
 }

@@ -12,57 +12,82 @@ updateDateTime();
 // 每秒更新一次日期和时间
 setInterval(updateDateTime, 1000);
 
-function generateTable() {
+function s_c() {
     const startTime = document.getElementById("startTime").value;
     const endTime = document.getElementById("endTime").value;
 
-    if (startTime && endTime) {
-        // 获取表格容器
-        const tableContainer = document.getElementById("tableContainer");
+    if (!startTime || !endTime ) {
+        alert("请填写完整的统计信息");
+    } else {
+        var data9 = "&startTime=" + startTime + "&endTime=" + endTime ;
+        var xhr9 = new XMLHttpRequest();
+        xhr9.open("POST", 'http://localhost:8080/ServletMaven/sc', true);
+        xhr9.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-        // 创建表格元素
-        const table = document.createElement("table");
-
-        // 创建表头
-        const headerRow = table.insertRow(0);
-        const headers = ["姓名", "工号", "开始时间", "结束时间", "事由"];
-
-        for (let i = 0; i < headers.length; i++) {
-            const th = document.createElement("th");
-            th.textContent = headers[i];
-            headerRow.appendChild(th);
-        }
-
-        // 模拟生成若干行数据
-        const data = [
-            ["John", "12345", "2023-09-23T08:00", "2023-09-23T16:00", "会议"],
-            ["Bob", "67890", "2023-09-24T09:00", "2023-09-24T17:00", "培训"],
-            ["Charlie", "24680", "2023-09-25T10:00", "2023-09-25T18:00", "休假"]
-        ];
-
-        // 创建数据行
-        for (let i = 0; i < data.length; i++) {
-            const row = table.insertRow(i + 1);
-            for (let j = 0; j < data[i].length; j++) {
-                const cell = row.insertCell(j);
-                if (j === 4) {
-                    // 添加点击事件处理事由列的详细内容
-                    const detailButton = document.createElement("button");
-                    detailButton.textContent = "查看详情";
-                    detailButton.addEventListener("click", function () {
-                        alert("详细信息：" + data[i][j]);
-                    });
-                    cell.appendChild(detailButton);
+        xhr9.onreadystatechange = function() {
+            if (xhr9.readyState === 4) {
+                if (xhr9.status === 200) {
+                    if (xhr9.responseText) {
+                        var response = JSON.parse(xhr9.responseText);
+                        displayArrivals(response);
+                    } else {
+                        console.error("No response data received.");
+                    }
                 } else {
-                    cell.textContent = data[i][j];
+                    console.error("Failed to fetch data. Status code: " + xhr9.status);
                 }
             }
+        };
+
+        xhr9.send(data9);
+
+    }
+}
+
+function displayArrivals(arrivals) {
+    var resultContainer = document.getElementById('tableContainer');
+
+    // 清空resultContainer内容
+    resultContainer.innerHTML = '';
+
+    if (arrivals.length > 0) {
+        var table = document.createElement('table');
+        var thead = document.createElement('thead');
+        var tbody = document.createElement('tbody');
+
+        var headerRow = document.createElement('tr');
+        var headerCell1 = document.createElement('th');
+        headerCell1.textContent = '员工号';
+        var headerCell2 = document.createElement('th');
+        headerCell2.textContent = '出差日期';
+        var headerCell3 = document.createElement('th');
+        headerCell3.textContent = '原因';
+
+        headerRow.appendChild(headerCell1);
+        headerRow.appendChild(headerCell2);
+        headerRow.appendChild(headerCell3);
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        for (var i = 0; i < arrivals.length; i++) {
+            var arrival = arrivals[i];
+            var row = document.createElement('tr');
+            var cell1 = document.createElement('td');
+            cell1.textContent = arrival.wno;
+            var cell2 = document.createElement('td');
+            cell2.textContent = arrival.bitime;
+            var cell3 = document.createElement('td');
+            cell3.textContent = arrival.bireason;
+            row.appendChild(cell1);
+            row.appendChild(cell2);
+            row.appendChild(cell3);
+            tbody.appendChild(row);
         }
 
-        // 清空表格容器并添加新表格
-        tableContainer.innerHTML = "";
-        tableContainer.appendChild(table);
+        table.appendChild(tbody);
+        resultContainer.appendChild(table);
     } else {
-        alert("请先选择开始时间和结束时间");
+        // 结果为空时显示提示信息
+        resultContainer.textContent = '无出差员工';
     }
 }
