@@ -57,9 +57,9 @@ function displayArrivals(arrivals) {
 
         var headerRow = document.createElement('tr');
         var headerCell1 = document.createElement('th');
-        headerCell1.textContent = 'WNO';
+        headerCell1.textContent = '员工号';
         var headerCell2 = document.createElement('th');
-        headerCell2.textContent = 'WNAME';
+        headerCell2.textContent = '姓名';
 
         headerRow.appendChild(headerCell1);
         headerRow.appendChild(headerCell2);
