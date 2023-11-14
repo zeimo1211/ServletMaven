@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.TimeZone;
 
 @WebServlet("/sign")
 public class sign extends HttpServlet {
@@ -52,6 +53,13 @@ public class sign extends HttpServlet {
 
         // 获取当前时间用于签到
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+        // 设置时区为东八区
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Shanghai");
+
+        // 调整时区
+        timestamp.setTime(timestamp.getTime() + timeZone.getRawOffset());
+
 
         try (PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, username);
