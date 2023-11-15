@@ -37,6 +37,7 @@ public class EmployeeManagementGUI extends JFrame {
 
         JButton addButton = new JButton("添加");
         JButton updateButton = new JButton("修改");
+        JButton deleteButton = new JButton("删除");
 
 
         // Set layout using GroupLayout
@@ -69,7 +70,9 @@ public class EmployeeManagementGUI extends JFrame {
                         .addComponent(wissuperField)
                         .addComponent(wdnoField)
                         .addComponent(addButton)
-                        .addComponent(updateButton)));
+                        .addComponent(updateButton)
+                        .addComponent(deleteButton)
+                ));
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -103,7 +106,9 @@ public class EmployeeManagementGUI extends JFrame {
                         .addComponent(wdnoLabel)
                         .addComponent(wdnoField))
                 .addComponent(addButton)
-                .addComponent(updateButton));
+                .addComponent(updateButton)
+                .addComponent(deleteButton)
+        );
 
 
         // Add action listener for the add button
@@ -121,9 +126,16 @@ public class EmployeeManagementGUI extends JFrame {
                 updateEmployee();
             }
         });
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                deleteEmployee();
+            }
+        });
+
         // Set frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 300);
+        setSize(400, 410);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -232,6 +244,53 @@ public class EmployeeManagementGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Error updating employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+    private void deleteEmployee() {
+        try {
+            // Load the JDBC driver
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            // Connect to the database
+            String url = "jdbc:mysql://localhost:3306/kaoqin?useSSL=false&serverTimezone=UTC";
+            String username = "root";
+            String password = "077418";
+            Connection connection = DriverManager.getConnection(url, username, password);
+
+            // Prepare the SQL statement for deleting from department_worker table
+            String deleteSql2 = "DELETE FROM department_worker WHERE wno=?";
+            try (PreparedStatement preparedStatement = connection.prepareStatement(deleteSql2)) {
+                // Set the values for the parameters
+                preparedStatement.setString(1, wnoField.getText());
+
+                // Execute the SQL statement
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    // If the record is found and deleted in department_worker table, proceed to delete from worker table
+                    String deleteSql1 = "DELETE FROM worker WHERE wno=?";
+                    try (PreparedStatement preparedStatementWorker = connection.prepareStatement(deleteSql1)) {
+                        // Set the values for the parameters
+                        preparedStatementWorker.setString(1, wnoField.getText());
+
+                        // Execute the SQL statement
+                        int workerRowsAffected = preparedStatementWorker.executeUpdate();
+
+                        if (workerRowsAffected > 0) {
+                            JOptionPane.showMessageDialog(this, "员工信息删除成功");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "没有找到该员工号在 worker 表中的记录", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "没有找到该员工号在 department_worker 表中的记录", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error deleting employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

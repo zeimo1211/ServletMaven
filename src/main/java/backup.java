@@ -8,7 +8,7 @@ public class backup extends JFrame {
     private JButton restoreButton;
 
     public backup() {
-        setTitle("后台管理系统");
+        setTitle("数据库备份系统");
         setSize(300, 150);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
