@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -8,9 +9,10 @@ import java.sql.SQLException;
 
 public class EmployeeManagementGUI extends JFrame {
     private JTextField wnoField, wnameField, genderField, wphoneField, wjobField, wstateField, waddressField, wkeywordField ,wissuperField, wdnoField;
+    private JButton addButton, updateButton, deleteButton, backupButton, restoreButton;
 
     public EmployeeManagementGUI() {
-        super("员工管理系统");
+        super("考勤后台管理系统");
 
         // Create GUI components
         JLabel wnoLabel = new JLabel("员工号:");
@@ -35,9 +37,11 @@ public class EmployeeManagementGUI extends JFrame {
         wkeywordField = new JTextField(20);
         wissuperField = new JTextField(20);
 
-        JButton addButton = new JButton("添加");
-        JButton updateButton = new JButton("修改");
-        JButton deleteButton = new JButton("删除");
+        addButton = new JButton("添加");
+        updateButton = new JButton("修改");
+        deleteButton = new JButton("删除");
+        backupButton = new JButton("备份数据库");
+        restoreButton = new JButton("恢复数据库");
 
 
         // Set layout using GroupLayout
@@ -69,10 +73,15 @@ public class EmployeeManagementGUI extends JFrame {
                         .addComponent(wkeywordField)
                         .addComponent(wissuperField)
                         .addComponent(wdnoField)
-                        .addComponent(addButton)
-                        .addComponent(updateButton)
-                        .addComponent(deleteButton)
-                ));
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(addButton)
+                                .addComponent(updateButton)
+                                .addComponent(deleteButton))
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(backupButton)
+                                .addComponent(restoreButton))
+                )
+        );
 
         layout.setVerticalGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
@@ -105,10 +114,15 @@ public class EmployeeManagementGUI extends JFrame {
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                         .addComponent(wdnoLabel)
                         .addComponent(wdnoField))
-                .addComponent(addButton)
-                .addComponent(updateButton)
-                .addComponent(deleteButton)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(addButton)
+                        .addComponent(updateButton)
+                        .addComponent(deleteButton))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(backupButton)
+                        .addComponent(restoreButton))
         );
+
 
 
         // Add action listener for the add button
@@ -133,9 +147,26 @@ public class EmployeeManagementGUI extends JFrame {
             }
         });
 
+        // Add action listener for the backup button
+        backupButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performBackup();
+            }
+        });
+
+        // Add action listener for the restore button
+        restoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                performRestore();
+            }
+        });
+
+
         // Set frame properties
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 410);
+        setSize(330, 400);
         setLocationRelativeTo(null);
         setVisible(true);
     }
@@ -188,6 +219,7 @@ public class EmployeeManagementGUI extends JFrame {
             JOptionPane.showMessageDialog(this, "Error adding employee: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
     private void updateEmployee() {
         try {
             // Load the JDBC driver
@@ -291,6 +323,83 @@ public class EmployeeManagementGUI extends JFrame {
         }
     }
 
+    private void performBackup() {
+        try {
+            String dbName = "kaoqin";  // 只使用数据库名称
+            String dbUser = "root";
+            String dbPass = "077418";
+            String filePath = "C:/Users/ASUS/Desktop/kaoqin/backup.sql";
+
+            ProcessBuilder processBuilder = new ProcessBuilder(
+                    "D:/Program Files/MySQL/MySQL Server 8.0/bin/mysqldump",
+                    "-u", dbUser,
+                    "-p" + dbPass,
+                    "--databases", dbName,
+                    "--result-file=" + filePath
+            );
+
+            // Redirect output to file
+            File backupFile = new File(filePath);
+            processBuilder.redirectOutput(backupFile);
+
+            Process process = processBuilder.start();
+            int exitCode = process.waitFor();
+
+            if (exitCode == 0) {
+                JOptionPane.showMessageDialog(this, "Backup completed successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Backup failed. Check console for error messages.");
+            }
+        } catch (IOException | InterruptedException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error during backup process. Check console for error messages.");
+        }
+    }
+
+
+
+    private void performRestore() {
+        try {
+            String dbName = "kaoqin";
+            String dbUser = "root";
+            String dbPass = "077418";
+            String filePath = "C:/Users/ASUS/Desktop/kaoqin/backup.sql";
+
+            String[] command = {
+                    "D:/Program Files/MySQL/MySQL Server 8.0/bin/mysql",
+                    dbName,
+                    "-u" + dbUser,
+                    "-p" + dbPass,
+                    "-e", "source " + filePath
+            };
+
+            ProcessBuilder processBuilder = new ProcessBuilder(command);
+            Process process = processBuilder.start();
+
+            // Capture errors
+            InputStream errorStream = process.getErrorStream();
+            InputStreamReader errorStreamReader = new InputStreamReader(errorStream);
+            BufferedReader errorBufferedReader = new BufferedReader(errorStreamReader);
+
+            // Read errors and print
+            StringBuilder errorMessage = new StringBuilder();
+            String line;
+            while ((line = errorBufferedReader.readLine()) != null) {
+                errorMessage.append(line).append("\n");
+            }
+
+            int exitCode = process.waitFor();
+
+            if (exitCode == 0) {
+                JOptionPane.showMessageDialog(this, "Restore completed successfully.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Restore failed. Check console for error messages:\n" + errorMessage.toString());
+            }
+        } catch (IOException | InterruptedException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(this, "Error during restore process.");
+        }
+    }
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
