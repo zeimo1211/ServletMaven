@@ -19,7 +19,7 @@ public class EmployeeManagementGUI extends JFrame {
         JLabel wnameLabel = new JLabel("姓名:");
         JLabel genderLabel = new JLabel("性别:");
         JLabel wphoneLabel = new JLabel("电话:");
-        JLabel wjobLabel = new JLabel("职业:");
+        JLabel wjobLabel = new JLabel("职务:");
         JLabel wdnoLabel = new JLabel("部门:");
         JLabel wstateLabel = new JLabel("状态:");
         JLabel waddressLabel = new JLabel("地址:");
