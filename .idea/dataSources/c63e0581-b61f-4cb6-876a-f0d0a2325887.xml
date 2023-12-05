@@ -1302,7 +1302,7 @@ worker|||supervisor|localhost|UPDATE|G</Grants>
       <Position>2</Position>
     </argument>
     <column id="343" parent="321" name="lino">
-      <AutoIncrement>12</AutoIncrement>
+      <AutoIncrement>13</AutoIncrement>
       <Comment>记录号</Comment>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
@@ -1420,7 +1420,7 @@ worker|||supervisor|localhost|UPDATE|G</Grants>
       <Type>btree</Type>
     </index>
     <column id="365" parent="324" name="bino">
-      <AutoIncrement>11</AutoIncrement>
+      <AutoIncrement>10</AutoIncrement>
       <Comment>记录号</Comment>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
@@ -1468,7 +1468,7 @@ worker|||supervisor|localhost|UPDATE|G</Grants>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="374" parent="325" name="wino">
-      <AutoIncrement>33</AutoIncrement>
+      <AutoIncrement>34</AutoIncrement>
       <Comment>记录号</Comment>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>

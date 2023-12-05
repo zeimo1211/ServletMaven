@@ -27,7 +27,7 @@ import java.sql.SQLException;
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        String dbUrl = "jdbc:mysql://localhost:3306/kaoqin?useSSL=false&serverTimezone=UTC";  // 数据库URL
+        String dbUrl = "jdbc:mysql://localhost:3306/kaoqin?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";  // 数据库URL
         String dbUser = "root";  // 数据库用户名
         String dbPassword = "077418";  // 数据库密码
 
